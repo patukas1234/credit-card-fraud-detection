@@ -1,0 +1,25 @@
+data: 
+  file_path: "./data/creditcard.csv"
+
+preprocess:
+  output_dir: "./data/processed"
+  anomaly_detection: True
+  class_imbalance:
+    oversample: True
+    module: "imblearn.over_sampling"
+    attr: "SMOTE"
+    ratio: 3
+
+train:
+  data_path: "./data/processed" 
+  model: 
+    module: "sklearn.linear_model"
+    attr: "LogisticRegression" 
+    name: "logistic_regression"
+    params: {"penalty": "l2", "C": 0.8}
+    
+test:
+  data_path: "./data/processed" 
+  model: 
+    path: "./mlruns/979822066418382618/e894710ffd014405a269337d32fc341c/artifacts/fraud_detection"
+    name: "logistic_regression"

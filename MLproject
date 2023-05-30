@@ -1,0 +1,25 @@
+name: fraud_detection_pipeline
+
+conda_env: mlflow_env.yaml
+
+entry_points:
+  preprocess:
+    parameters:
+      experiment_name: {type: string, default: "test_exp"}
+    command: "python3 preprocess.py --experiment-name {experiment_name}" 
+
+  train:
+    parameters:
+        experiment_name: {type: string, default: "test_exp"}
+    command: "python3 train.py --experiment-name {experiment_name}"
+
+  test:
+    parameters:
+        experiment_name: {type: string, default: "test_exp"}
+    command: "python3 test.py --experiment-name {experiment_name}"
+    
+  main:
+    parameters:
+        experiment_name: {type: string, default: "test_exp"}
+    command: "python3 main.py --experiment-name {experiment_name}"
+
