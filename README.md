@@ -71,10 +71,10 @@ This repository implements an MLflow pipeline to experiment with the [credit car
     model: 
         path: "./mlruns/979822066418382618/e894710ffd014405a269337d32fc341c/artifacts/fraud_detection"
         name: "logistic_regression"
-        ...
+    ...
     ```
     - Log test set performance metrics, confusion matrix and PR curves:
-        ``` 
+    ``` 
     python test.py --experiment-name <TEXT>
     ```
     or with mlflow cli
@@ -86,7 +86,7 @@ This repository implements an MLflow pipeline to experiment with the [credit car
     ``` 
     python main.py --experiment-name <TEXT>
     ```
-    or
+    or with mlflow cli
     ``` 
     mlflow run . -e main --experiment-name <TEXT> -P experiment_name=<TEXT>
     ```
