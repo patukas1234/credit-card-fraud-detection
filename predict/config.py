@@ -1,5 +1,6 @@
 from pydantic_settings import BaseSettings
 
+
 class Settings(BaseSettings):
     api_token: str = ""
     api_host: str = "localhost"
@@ -12,7 +13,3 @@ class Settings(BaseSettings):
 
 
 settings = Settings()
-
-
-
-
