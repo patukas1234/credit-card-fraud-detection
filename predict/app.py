@@ -32,7 +32,6 @@ async def predict(request: PredictionRequest,
     input_features = request.features
     try:
         prediction, prediction_probability = predictor.predict(input_features)
-        logger.warning(f"pred {prediction} proba {prediction_probability}")
         response = PredictionResponse(account_id=request.account_id, prediction=prediction[0], probability_fraud=prediction_probability[0][1])
     except Exception as e:
         raise HTTPException(500, str(e))
