@@ -1,20 +1,26 @@
 # MLflow Pipeline for Fraud Detection Task
 
 
-This repository implements an MLflow pipeline to experiment with the [credit card fraud kaggle task](https://www.kaggle.com/datasets/mlg-ulb/creditcardfraud).
+This repository implements an MLflow model training pipeline to experiment with the [credit card fraud kaggle task](https://www.kaggle.com/datasets/mlg-ulb/creditcardfraud) and a prediction api.
 
-## Getting started
 
-1. Install and setup python 3 and Anaconda
-2. Create and activate conda environment: 
-    ```
-    conda env create --name mlflow_env --file=mlflow_env.yaml
-    ```
-    ```
-    conda activate mlflow_env
-    ```
-3. Download [kaggle credit card fraud dataset](https://www.kaggle.com/datasets/mlg-ulb/creditcardfraud) to `./data`
-4. Data preprocessing, model training and test parameters can be set in `config.yaml`
+# Getting started
+
+1. Install poetry 
+2. Install dependencies and activate the virtual environment  `poetry install` and `poetry shell`
+3. Download [kaggle credit card fraud dataset](https://www.kaggle.com/datasets/mlg-ulb/creditcardfraud) to `./train/data`
+
+## Prediction API
+
+For local runs, create a .env file (see .example.env) to specify a trained model file path, host (localhost default), port (8000 default) and api token. 
+
+From project root directory run `python predict/app.py`
+
+The api is implemented with FastAPI, which includes built-in Swagger UI suppoer. Go to `http://<host>:<port>/docs` to interact with the api.
+
+## Training
+
+Data preprocessing, model training and test parameters can be set in `config.yaml`
 
 ## Tracked experimentation with MLflow:
 
@@ -41,10 +47,6 @@ This repository implements an MLflow pipeline to experiment with the [credit car
     ``` 
     python preprocess.py --experiment-name <TEXT>
     ```
-    or with mlflow cli
-    ``` 
-    mlflow run . -e preprocess --experiment-name <TEXT> -P experiment_name=<TEXT>
-    ```
 - `train.py`: 
     - Train a classifier specified in `config.yaml` params. E.g.:
     ```
@@ -60,10 +62,6 @@ This repository implements an MLflow pipeline to experiment with the [credit car
     ``` 
     python train.py --experiment-name <TEXT>
     ```
-    or with mlflow cli
-    ``` 
-    mlflow run . -e train --experiment-name <TEXT> -P experiment_name=<TEXT>
-    ```
 - `test.py`: 
     - Test the trained classifier. Trained model file path specified in `config.yaml` params. E.g.:
     ```
@@ -77,17 +75,9 @@ This repository implements an MLflow pipeline to experiment with the [credit car
     ``` 
     python test.py --experiment-name <TEXT>
     ```
-    or with mlflow cli
-    ``` 
-    mlflow run . -e test --experiment-name <TEXT> -P experiment_name=<TEXT>
-    ```
 - `main.py`: 
     - implements an end-to-end workflow of `preprocess`, `tain` and `test` entrypoints . 
     ``` 
     python main.py --experiment-name <TEXT>
-    ```
-    or with mlflow cli
-    ``` 
-    mlflow run . -e main --experiment-name <TEXT> -P experiment_name=<TEXT>
     ```
 
