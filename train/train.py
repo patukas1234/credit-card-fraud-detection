@@ -3,6 +3,7 @@ import yaml
 import importlib
 import os
 import argparse 
+import logging 
 
 import matplotlib.pyplot as plt
 import numpy as np
@@ -10,6 +11,9 @@ import numpy as np
 from pathlib import Path
 from mlflow.models.signature import infer_signature
 from utils import get_eval_metrics, plot_model_performance_metrics
+
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.INFO)
 
 with open("config.yaml", "r") as f:
     config = yaml.load(f, Loader=yaml.FullLoader)
@@ -19,7 +23,7 @@ def task_train(experiment_name, data_path = None):
     existing_exp = mlflow.get_experiment_by_name(experiment_name)
     if not existing_exp:
         mlflow.create_experiment(experiment_name, artifact_location="...")
-        print("Experiment {} created".format(experiment_name))
+        logger.info(f"Experiment {experiment_name} created")
     mlflow.set_experiment(experiment_name)
 
     with mlflow.start_run(run_name = "train") as run:
