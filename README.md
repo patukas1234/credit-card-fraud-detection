@@ -1,7 +1,15 @@
 # MLflow Pipeline for Fraud Detection Task
 
 
-This repository implements an MLflow model training pipeline to experiment with the [credit card fraud kaggle task](https://www.kaggle.com/datasets/mlg-ulb/creditcardfraud) and a prediction api.
+This repository implements an MLflow model training pipeline and a prediction api to experiment with the [credit card fraud kaggle task](https://www.kaggle.com/datasets/mlg-ulb/creditcardfraud).
+
+- The data includes credit card transactions, with features transformed through PCA.
+
+- The MLFlow training pipeline allows experimentation that is trackable and replicable, and can be extended to train different classifiers.
+
+- The prediction API is implemented with FastAPI, and let's you evaluate "online" model performance and provides a useful UI to test it.
+
+- The training script further implements a feature augmentation approach using anomaly score derived from isolation forests, as described in [literature](https://www.researchgate.net/profile/Sameena-Naaz-3/publication/335809102_Credit_Card_Fraud_Detection_using_Local_Outlier_Factor_and_Isolation_Forest/links/5d8cd723299bf10cff129722/Credit-Card-Fraud-Detection-using-Local-Outlier-Factor-and-Isolation-Forest.pdf). The augmented features can be used for training fraud detection classifier with improved performance.
 
 
 # Getting started
